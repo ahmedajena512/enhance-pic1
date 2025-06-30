@@ -228,17 +228,10 @@ function App() {
       <AnimatedBackground />
       
       {/* Header */}
-      <Header 
-        onHistoryClick={() => setShowHistory(true)} 
-        user={user}
-      />
+      <Header onHistoryClick={() => setShowHistory(true)} />
       
       {/* History Panel */}
-      <HistoryPanel 
-        isOpen={showHistory}
-        onClose={() => setShowHistory(false)}
-        user={user}
-      />
+      <HistoryPanel isOpen={showHistory} onClose={() => setShowHistory(false)} />
       {/* Share Modal */}
       <SocialShare 
         isOpen={showShareModal}
