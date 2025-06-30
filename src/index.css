@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Custom Properties for Advanced Animations */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --gradient-angle-offset {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --gradient-percent {
+  syntax: "<percentage>";
+  initial-value: 20%;
+  inherits: false;
+}
+
+@property --gradient-shine {
+  syntax: "<color>";
+  initial-value: #8484ff;
+  inherits: false;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    
+    /* Enhanced Theme Variables */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 212.7 26.8% 83.9%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    
+    /* Liquid Glass Variables */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-bg-secondary: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: rgba(79, 70, 229, 0.3);
+    
+    /* Gradient Variables */
+    --gradient-primary: linear-gradient(135deg, #4f46e5, #3b82f6, #8b5cf6);
+    --gradient-secondary: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    
+    /* Animation Variables */
+    --animation-duration: 0.8s;
+    --animation-delay: 0.1s;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Geist', 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Liquid Glass Effects */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+  
+  .glass-strong {
+    background: var(--glass-bg-secondary);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--glass-border);
+  }
+  
+  /* Gradient Borders */
+  .gradient-border {
+    position: relative;
+    background: var(--gradient-secondary);
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: var(--gradient-primary);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+  }
+  
+  /* Inner Glow Effects */
+  .inner-glow {
+    box-shadow: 
+      inset 0 0 20px rgba(79, 70, 229, 0.3),
+      inset 0 0 40px rgba(59, 130, 246, 0.2),
+      0 0 30px rgba(139, 92, 246, 0.4);
+  }
+  
+  /* Card with Liquid Glass Border */
+  .card-glass {
+    background: rgba(79, 70, 229, 0.08);
+    border: 1px solid rgba(79, 70, 229, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 
+      0 0 0 1px rgba(79, 70, 229, 0.3),
+      inset 0 0 30px rgba(79, 70, 229, 0.1),
+      inset 0 0 60px rgba(59, 130, 246, 0.05),
+      0 0 50px rgba(139, 92, 246, 0.2);
+  }
+  
+  /* Animated Gradient Text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+  
+  /* Connector Lines with Animation */
+  .connector {
+    stroke-dasharray: 8;
+    animation: data-stream 2s linear infinite;
+  }
+  
+  /* Floating Animation Variants */
+  .table-float:nth-child(2) { animation-delay: -1s; }
+  .table-float:nth-child(3) { animation-delay: -2s; }
+  .table-float:nth-child(4) { animation-delay: -3s; }
+  
+  /* Enhanced Button with Liquid Glass */
+  .btn-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  
+  .btn-glass:hover {
+    background: var(--glass-bg-secondary);
+    border-color: rgba(79, 70, 229, 0.5);
+    box-shadow: 0 0 30px rgba(79, 70, 229, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  /* File Drop Zone */
+  .drop-zone {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px dashed var(--glass-border);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  
+  .drop-zone.drag-active {
+    border-color: #4f46e5;
+    background: rgba(79, 70, 229, 0.1);
+    box-shadow: 
+      inset 0 0 30px rgba(79, 70, 229, 0.2),
+      0 0 50px rgba(79, 70, 229, 0.3);
+  }
+  
+  /* Typewriter Effect */
+  .typewriter {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .typewriter::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #4f46e5;
+    animation: typewriter 1s infinite;
+  }
+}
+
+@layer utilities {
+  /* Animation Delays */
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
+  .delay-500 { animation-delay: 0.5s; }
+  .delay-600 { animation-delay: 0.6s; }
+  .delay-700 { animation-delay: 0.7s; }
+  .delay-800 { animation-delay: 0.8s; }
+  .delay-900 { animation-delay: 0.9s; }
+  .delay-1000 { animation-delay: 1.0s; }
+  
+  /* Responsive Image Handling */
+  img {
+    object-position: top;
+  }
+}
